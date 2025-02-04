@@ -1,4 +1,5 @@
 # Supabase MCP Server
+[![smithery badge](https://smithery.ai/badge/@arjunkmrm/mcp-supabase)](https://smithery.ai/server/@arjunkmrm/mcp-supabase)
 
 A Model Context Protocol (MCP) server that provides comprehensive tools for interacting with Supabase databases, storage, and edge functions. This server enables seamless integration between Supabase services and MCP-compatible applications.
 
@@ -14,10 +15,7 @@ The Supabase MCP server acts as a bridge between MCP clients and Supabase's suit
 - User authentication and management
 - Role-based access control
 
-
-## MCP Integration
-
-Add the server to your MCP settings:
+## Add the server to your MCP settings:
 
 ```json
 {
