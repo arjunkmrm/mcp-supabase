@@ -2,7 +2,6 @@
 
 A Model Context Protocol (MCP) server that provides comprehensive tools for interacting with Supabase databases, storage, and edge functions. This server enables seamless integration between Supabase services and MCP-compatible applications.
 
-<a href="https://glama.ai/mcp/servers/vwi6nt8i80"><img width="380" height="200" src="https://glama.ai/mcp/servers/vwi6nt8i80/badge" alt="supabase-mcp MCP server" /></a>
 
 ## Overview
 
@@ -15,85 +14,27 @@ The Supabase MCP server acts as a bridge between MCP clients and Supabase's suit
 - User authentication and management
 - Role-based access control
 
-## Architecture
 
-The server is built using TypeScript and follows a modular architecture:
+## MCP Integration
 
-```
-supabase-server/
-├── src/
-│   ├── index.ts              # Main server implementation
-│   └── types/
-│       └── supabase.d.ts     # Type definitions
-├── package.json
-├── tsconfig.json
-├── config.json.example       # Example configuration file
-└── .env.example             # Environment variables template
-```
+Add the server to your MCP settings:
 
-### Key Components
-
-- **Server Class**: Implements the MCP server interface and handles all client requests
-- **Type Definitions**: Comprehensive TypeScript definitions for all operations
-- **Environment Configuration**: Secure configuration management via environment variables
-- **Error Handling**: Robust error handling with detailed error messages
-
-## Prerequisites
-
-- Node.js 16.x or higher
-- A Supabase project with:
-  - Project URL
-  - Service Role Key (for admin operations)
-  - Access Token (for management operations)
-- MCP-compatible client
-
-## Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/DynamicEndpoints/supabase-mcp.git
-cd supabase-mcp
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Create environment configuration:
-```bash
-cp .env.example .env
-```
-
-4. Configure environment variables:
-```bash
-SUPABASE_URL=your_project_url_here
-SUPABASE_KEY=your_service_role_key_here
-SUPABASE_ACCESS_TOKEN=your_access_token_here  # Required for management operations
-```
-
-5. Create server configuration:
-```bash
-cp config.json.example config.json
-```
-
-6. Build the server:
-```bash
-npm run build
-```
-
-## Configuration
-
-The server supports extensive configuration through both environment variables and a config.json file. Here's a detailed breakdown of the configuration options:
-
-### Server Configuration
 ```json
 {
-  "server": {
-    "name": "supabase-server",    // Server name
-    "version": "0.1.0",           // Server version
-    "port": 3000,                 // Port number (if running standalone)
-    "host": "localhost"           // Host address (if running standalone)
+  "mcpServers": {
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-supabase"
+        ],
+      "env": {
+        "SUPABASE_URL": "your_project_url",
+        "SUPABASE_KEY": "your_service_role_key",
+        "SUPABASE_ACCESS_TOKEN": "your_access_token"
+      },
+      "config": "path/to/config.json"  // Optional: path to configuration file
+    }
   }
 }
 ```
@@ -186,27 +127,6 @@ The server supports extensive configuration through both environment variables a
 ```
 
 See `config.json.example` for a complete example configuration file.
-
-## MCP Integration
-
-Add the server to your MCP settings (cline_mcp_settings.json):
-
-```json
-{
-  "mcpServers": {
-    "supabase": {
-      "command": "node",
-      "args": ["path/to/supabase-server/build/index.js"],
-      "env": {
-        "SUPABASE_URL": "your_project_url",
-        "SUPABASE_KEY": "your_service_role_key",
-        "SUPABASE_ACCESS_TOKEN": "your_access_token"
-      },
-      "config": "path/to/config.json"  // Optional: path to configuration file
-    }
-  }
-}
-```
 
 ## Available Tools
 
@@ -499,11 +419,3 @@ npm run lint
 ## License
 
 MIT License - see LICENSE for details
-
-## Support
-
-For support, please:
-
-1. Check the [issues](https://github.com/DynamicEndpoints/supabase-mcp/issues) for existing problems/solutions
-2. Create a new issue with detailed reproduction steps
-3. Include relevant error messages and environment details
