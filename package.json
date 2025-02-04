@@ -1,10 +1,18 @@
 {
-  "name": "supabase-server",
+  "name": "mcp-supabase",
   "version": "0.1.0",
+  "license": "MIT",
   "type": "module",
+  "bin": {
+    "mcp-supabase": "build/index.js"
+  },
+  "files": [
+    "build"
+  ],
   "scripts": {
-    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
-    "start": "node build/index.js"
+    "build": "tsc && shx chmod +x build/*.js",
+    "prepare": "npm run build",
+    "watch": "tsc --watch"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.6.0",
@@ -12,6 +20,7 @@
     "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "@types/node": "^20.11.5"
+    "@types/node": "^20.11.5",
+    "shx": "^0.3.4"
   }
 }
